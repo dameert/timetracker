@@ -54,4 +54,9 @@ class Task
     {
         $this->project = $project;
     }
+
+    public function __toString(): string
+    {
+        return $this->getName();
+    }
 }
