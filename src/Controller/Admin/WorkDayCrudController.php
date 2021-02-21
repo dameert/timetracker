@@ -4,6 +4,9 @@ namespace App\Controller\Admin;
 
 use App\Entity\WorkDay;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 
 class WorkDayCrudController extends AbstractCrudController
 {
@@ -12,14 +15,12 @@ class WorkDayCrudController extends AbstractCrudController
         return WorkDay::class;
     }
 
-    /*
+
     public function configureFields(string $pageName): iterable
     {
         return [
-            IdField::new('id'),
-            TextField::new('title'),
-            TextEditorField::new('description'),
+            DateField::new('date'),
+            CollectionField::new('timeSlots'),
         ];
     }
-    */
 }

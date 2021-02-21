@@ -17,12 +17,17 @@ class TimeSlot
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private int $id;
+    private $id;
 
     /**
-     * @ORM\Column(type="dateinterval")
+     * @ORM\Column(type="time_immutable")
      */
-    private \DateInterval $timeInterval;
+    private \DateTimeImmutable $startTime;
+
+    /**
+     * @ORM\Column(type="time_immutable")
+     */
+    private \DateTimeImmutable $endTime;
 
     /**
      * @ORM\ManyToOne(targetEntity=Task::class)
@@ -36,19 +41,9 @@ class TimeSlot
      */
     private WorkDay $workDay;
 
-    public function getId(): int
+    public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getTimeInterval(): \DateInterval
-    {
-        return $this->timeInterval;
-    }
-
-    public function setTimeInterval(\DateInterval $timeInterval): void
-    {
-        $this->timeInterval = $timeInterval;
     }
 
     public function getTask(): Task
@@ -69,5 +64,25 @@ class TimeSlot
     public function setWorkDay(WorkDay $workDay): void
     {
         $this->workDay = $workDay;
+    }
+
+    public function getStartTime(): \DateTimeImmutable
+    {
+        return $this->startTime;
+    }
+
+    public function setStartTime(\DateTimeImmutable $startTime): void
+    {
+        $this->startTime = $startTime;
+    }
+
+    public function getEndTime(): \DateTimeImmutable
+    {
+        return $this->endTime;
+    }
+
+    public function setEndTime(\DateTimeImmutable $endTime): void
+    {
+        $this->endTime = $endTime;
     }
 }

@@ -19,13 +19,12 @@ class WorkDay
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private int $id;
+    private $id;
 
     /**
-     * @ORM\Column(type="date_immutable")
+     * @ORM\Column(type="date_immutable", unique=true)
      */
     private \DateTimeImmutable $date;
-
 
     /**
      * @ORM\OneToMany(targetEntity=TimeSlot::class, mappedBy="workDay", orphanRemoval=true)
@@ -35,9 +34,10 @@ class WorkDay
     public function __construct()
     {
         $this->timeSlots = new ArrayCollection();
+        $this->date = new \DateTimeImmutable('now');
     }
 
-    public function getId(): int
+    public function getId(): ?int
     {
         return $this->id;
     }
@@ -76,5 +76,10 @@ class WorkDay
                 $timeSlot->setWorkDay(null);
             }
         }
+    }
+
+    public function __toString(): string
+    {
+        return $this->getDate()->format('d/m/y');
     }
 }
