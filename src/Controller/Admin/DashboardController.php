@@ -15,7 +15,7 @@ class DashboardController extends AbstractDashboardController
 {
     public function index(): Response
     {
-        return parent::index();
+        return $this->render('dashboard/calendar.html.twig');
     }
 
     public function configureDashboard(): Dashboard
@@ -30,9 +30,12 @@ class DashboardController extends AbstractDashboardController
     {
         yield MenuItem::linktoDashboard('Dashboard', 'fa fa-home');
 
+        yield MenuItem::section('Register work');
+        yield MenuItem::linkToCrud('WorkDay', 'fas fa-list', WorkDay::class);
+        yield MenuItem::linkToCrud('TimeSlot', 'fas fa-list', TimeSlot::class);
+
+        yield MenuItem::section('Manage work');
         yield MenuItem::linkToCrud('Projects', 'fas fa-list', Project::class);
         yield MenuItem::linkToCrud('Tasks', 'fas fa-list', Task::class);
-        yield MenuItem::linkToCrud('TimeSlot', 'fas fa-list', TimeSlot::class);
-        yield MenuItem::linkToCrud('WorkDay', 'fas fa-list', WorkDay::class);
     }
 }
